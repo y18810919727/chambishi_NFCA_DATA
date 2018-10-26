@@ -15,7 +15,7 @@ ID_name = "IDtoName.xls"
 
 
 def get_used_id_list(file_name):
-    id_table = pd.read_excel(file_name, sheetname='Sheet1')
+    id_table = pd.read_excel(file_name, sheet_name='Sheet1')
     no_used_list =['不要','不管','没用','没数据']
     res = []
     for rowid in id_table.index:
