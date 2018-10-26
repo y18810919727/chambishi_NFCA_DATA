@@ -18,6 +18,7 @@ import time
 #time.strptime(dt, "%Y-%m-%d %H:%M:%S")
 used_index=[]
 def run(file_name, filter=False):
+    print(filter)
     data = pd.read_csv(file_name,sep=';')
     res = data[data.ValueID == 1]
     res.rename(columns={'RealValue':'1'},inplace=True)
@@ -46,6 +47,7 @@ def run(file_name, filter=False):
     #print(res)
     delete_list = []
     #print(res)
+    res.reset_index(inplace=True)
     # delete datas with 0 feeding flow
     if filter:
         for id in res.index:
@@ -77,6 +79,6 @@ if __name__ == '__main__':
         file_name = sys.argv[1]
         filter = False 
         if len(sys.argv) is 3:
-            if sys.argv[2] is 'True':
+            if sys.argv[2] == 'filter':
                 filter = True
         run(file_name, filter)
