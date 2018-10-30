@@ -20,13 +20,17 @@ used_index=[]
 def run(file_name, filter=False):
     print(filter)
     data = pd.read_csv(file_name,sep=';')
+    print(data.columns)
+    data['Timestamp'] = data.apply(lambda r:r['Timestamp'][0:-13],axis=1)
+    print(data)
     res = data[data.ValueID == 1]
     res.rename(columns={'RealValue':'1'},inplace=True)
     res.drop(res.columns[[0,3,4]],axis=1,inplace=True)
     id_list = ide.get_used_id_list(ide.ID_name)
     #print(res)
     res.set_index('Timestamp', inplace=True)
-    #print(res)
+    #res['Timestamp'] = res.apply(lambda r:r['Timestamp'][0:-10],axis=1)
+    print(res)
 
     for i in range(2,58):
         if str(i) not in id_list:
